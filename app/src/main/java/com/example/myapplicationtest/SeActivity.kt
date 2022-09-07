@@ -1,40 +1,22 @@
 package com.example.myapplicationtest
 
-import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.example.myapplicationtest.databinding.ActivitySeBinding
+import android.os.Bundle
+import android.widget.Button
 
 class SeActivity : AppCompatActivity() {
-
-    private lateinit var appBarConfiguration: AppBarConfiguration
-private lateinit var binding: ActivitySeBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_se)
 
-     binding = ActivitySeBinding.inflate(layoutInflater)
-     setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
-
-        val navController = findNavController(R.id.nav_host_fragment_content_se)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+        val button: Button = findViewById(R.id.button_url)
+        button.setOnClickListener{
+            val intent = Intent(Intent.ACTION_VIEW);
+            intent.data = Uri.parse("https://www.baidu.com");
+            startActivity(intent)
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-    val navController = findNavController(R.id.nav_host_fragment_content_se)
-    return navController.navigateUp(appBarConfiguration)
-            || super.onSupportNavigateUp()
     }
 }
